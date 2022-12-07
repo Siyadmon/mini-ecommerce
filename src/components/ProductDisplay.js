@@ -6,9 +6,9 @@ export class ProductDisplay extends Component {
   };
   render() {
     let product = this.props.products;
-    if (this.props.filter.length > 0) {
-      product = product.filter((eachProduct) =>
-        this.props.filter.includes(eachProduct.size)
+    if (this.props.size) {
+      product = product.filter(
+        (eachProduct) => this.props.size === eachProduct.size
       );
     }
     const mappedProducts = product.map((data, index) => {

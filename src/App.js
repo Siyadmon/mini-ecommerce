@@ -6,6 +6,7 @@ export class App extends Component {
   state = {
     cart: [],
     ItemSize: [],
+    filter: null,
   };
   countIncrese = (id, mode) => {
     //mode contains 'add' and 'remove' from this.props.func.includes(data.id)
@@ -18,30 +19,34 @@ export class App extends Component {
           : this.state.cart.filter((p) => p !== id),
     });
   };
-
-  filterRes = (size) => {
-    this.setState({
-      ItemSize: [...this.state.ItemSize, size],
-    });
+  onFilterchange = (filter) => {
+    this.setState({ filter });
   };
+  // filterRes = (size) => {
+  //   this.setState({
+  //     ItemSize: [...this.state.ItemSize, size],
+  //   });
+  // };
 
-  filterRem = (size) => {
-    this.setState({
-      ItemSize: this.state.ItemSize.filter((itemsize) => itemsize !== size),
-    });
-  };
+  // filterRem = (size) => {
+  //   this.setState({
+  //     ItemSize: this.state.ItemSize.filter((itemsize) => itemsize !== size),
+  //   });
+  // };
 
   render() {
-    console.log(this.state.ItemSize);
     return (
       <div className="container-fluid">
         <ProductDisplay
           products={Products}
           func={this.state.cart}
           countIncrese={this.countIncrese}
-          filter={this.state.ItemSize}
+          size={this.state.filter}
         />
-        <Filter filterRes={this.filterRes} filterRem={this.filterRem} />
+        <Filter
+          onFilterchange={this.onFilterchange}
+          filterSeletced={this.state.filter}
+        />
       </div>
     );
   }

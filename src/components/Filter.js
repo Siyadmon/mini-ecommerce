@@ -4,13 +4,13 @@ import '../components/styles.css';
 
 export class Filter extends Component {
   render() {
-    const filterResult = (size) => {
-      this.props.filterRes(size);
-    };
+    // const filterResult = (size) => {
+    //   this.props.filterRes(size);
+    // };
 
-    const filterRemove = (size) => {
-      this.props.filterRem(size);
-    };
+    // const filterRemove = (size) => {
+    //   this.props.filterRem(size);
+    // };
 
     const Filter = ['XS', 'XL', 'XXL'];
     return (
@@ -22,10 +22,11 @@ export class Filter extends Component {
             <input
               className="form-check-input"
               type="checkbox"
-              onClick={(e) =>
-                e.target.checked === true
-                  ? filterResult(eachFilter)
-                  : filterRemove(eachFilter)
+              checked={this.props.filterSeletced === eachFilter}
+              onChange={(e) =>
+                this.props.onFilterchange(
+                  e.target.checked === true ? eachFilter : null
+                )
               }
             />
             <label className="form-check-label">{eachFilter}</label>
