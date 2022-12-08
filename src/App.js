@@ -6,7 +6,7 @@ export class App extends Component {
   state = {
     cart: [],
     ItemSize: [],
-    filter: null,
+    // filter: null,
   };
   countIncrese = (id, mode) => {
     //mode contains 'add' and 'remove' from this.props.func.includes(data.id)
@@ -19,20 +19,20 @@ export class App extends Component {
           : this.state.cart.filter((p) => p !== id),
     });
   };
-  onFilterchange = (filter) => {
-    this.setState({ filter });
+  // onFilterchange = (filter) => {
+  //   this.setState({ filter });
+  // };
+  filterRes = (size) => {
+    this.setState({
+      ItemSize: [...this.state.ItemSize, size],
+    });
   };
-  // filterRes = (size) => {
-  //   this.setState({
-  //     ItemSize: [...this.state.ItemSize, size],
-  //   });
-  // };
 
-  // filterRem = (size) => {
-  //   this.setState({
-  //     ItemSize: this.state.ItemSize.filter((itemsize) => itemsize !== size),
-  //   });
-  // };
+  filterRem = (size) => { 
+    this.setState({
+      ItemSize: this.state.ItemSize.filter((itemsize) => itemsize !== size),
+    });
+  };
 
   render() {
     return (
@@ -41,11 +41,10 @@ export class App extends Component {
           products={Products}
           func={this.state.cart}
           countIncrese={this.countIncrese}
-          size={this.state.filter}
+          filter={this.state.ItemSize}
         />
         <Filter
-          onFilterchange={this.onFilterchange}
-          filterSeletced={this.state.filter}
+         filterRes={this.filterRes} filterRem={this.filterRem}
         />
       </div>
     );
